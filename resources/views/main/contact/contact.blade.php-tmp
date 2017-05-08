@@ -1,0 +1,82 @@
+@extends('layout.master')
+
+
+@section('title')
+	Contact|Index
+	@endsection()
+
+@section('content')
+
+	<br>
+
+	<div class="row">
+
+		<div class="col-md-offset-4 col-md-4">
+			{{csrf_field()}}
+			<label for="Name">Name:</label>
+			<input type="text" id="name" name="name" placeholder="Your name Here" class="form-control">
+			<br>
+			<button id="add" class="btn btn-default">save</button>
+
+		</div>
+
+	</div>
+	<br>
+	<br>
+	<div class="row" id="data">
+
+		<div class="col-md-offset-2 col-md-8">
+
+			<table class="table table-hover">
+				<caption>Ajax Data are Here</caption>
+				<thead>
+					<tr>
+					<th>id</th>
+					<th>name</th>
+					<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					@foreach($contact as $contact)
+					<tr>
+						<td>{{$contact->id}}</td>
+						<td >{{$contact->name}}</td>
+						<td>Edit</td>
+
+					</tr>
+					@endforeach()
+
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+
+			$('#add').click(function(event) {
+				var name=$('#name').val();
+				if(name==""){
+
+					alert('cant empty fill data');
+				}else{
+					$.post('contact',{'name': name,'_token':$('input[name=_token]').val()}, function(data) {
+					$('#name').val('');
+					$('#data').load(location.href + ' #data');
+					console.log(data);
+				});
+
+					}
+
+
+			});
+
+		});
+
+	</script>
+
+@endsection

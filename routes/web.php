@@ -28,6 +28,13 @@ Route::post('delete','AjaxController@delete');
 Route::post('update','AjaxController@update');
 
 
+Route::get('contact','ContactController@index');
+Route::post('contact','ContactController@add');
+
+
+
+
+
 
 
 
