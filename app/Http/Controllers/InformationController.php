@@ -43,7 +43,7 @@ class InformationController extends Controller
         $info->name =$request->name;
         $info->description =$request->description;
         $info->save();
-        session()->flash('msg-add','one iten added successfull');
+        session()->flash('message','one iten added successfull');
         return redirect()->route('information.index');
     }
 

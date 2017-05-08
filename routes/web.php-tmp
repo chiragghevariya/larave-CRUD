@@ -9,29 +9,20 @@
 | by your application. Just tell Laravel the URIs it should respond
 | to using a Closure or controller method. Build something great!
 |
-*/
+ */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+		return view('welcome');
+	});
 
-Route::get('master',function (){
+Route::get('master', function () {
 
-    return view('layout.master');
-});
+		return view('layout.master');
+	});
 
-Route::resource('information','InformationController');
+Route::resource('information', 'InformationController');
 
-Route::get('ajax','AjaxController@index');
-Route::post('ajax','AjaxController@create');
-Route::post('delete','AjaxController@delete');
-Route::post('update','AjaxController@update');
-
-
-
-
-
-
-
-
-
+Route::get('ajax', 'AjaxController@index');
+Route::post('ajax', 'AjaxController@create');
+Route::post('delete', 'AjaxController@delete');
+Route::post('update', 'AjaxController@update');

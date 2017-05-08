@@ -15,26 +15,33 @@
 
     <div class="container">
 
-        @if(session('msg-delete'))
+        <div class="autohide">
 
-            <div class="alert alert-danger" style="width:40%;position: static;overflow: hidden">
-                {{session('msg-delete')}}
-            </div>
-        @endif
+            @if(session('msg-delete'))
 
-        @if(session('msg-update'))
+                <div class="alert alert-danger" style="width:40%;position: static;overflow: hidden">
+                    {{session('msg-delete')}}
+                </div>
+            @endif
 
-            <div class="alert alert-success" style="overflow: hidden;position:static;width: 40%">
-                {{session('msg-update')}}
-            </div>
-        @endif
+            @if(session('msg-update'))
 
-        @if(session('msg-add'))
+                <div class="alert alert-success" style="overflow: hidden;position:static;width: 40%">
+                    {{session('msg-update')}}
+                </div>
+            @endif
 
-            <div class="alert alert-success" style="width:40%;overflow: hidden;position: static">
-                {{session('msg-add')}}
-            </div>
-        @endif
+            @if(session('message'))
+
+                <div class="alert alert-success" style="width:40%;overflow: hidden;position: static">
+                    {{session('message')}}
+                </div>
+            @endif
+
+
+
+        </div>
+
 
         <div>
 
@@ -45,13 +52,13 @@
         <table class="table table-responsive table-striped tableinfo" >
 
             <thead>
-
-            <th>Id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Edit</th>
-            <th>Delete</th>
-
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                <tr>
 
             </thead>
             @foreach($infodata as $info)
@@ -60,7 +67,6 @@
                 <td>{{$info->name}}</td>
                 <td>{{$info->description}}</td>
                 <td >  <a href="{{route('information.edit',['id'=>$info->id])}}" class="btn btn-success">Edit</a></td>
-
                 <td>
                     <form method="post" action="{{route('information.destroy',['id'=>$info->id])}}">
                         {{csrf_field()}}
@@ -79,5 +85,15 @@
 
 
     </div>
+
+    <script type="text/javascript">
+
+        window.setTimeout(function() {
+            $(".autohide").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 500);
+
+    </script>
 
  @endsection
